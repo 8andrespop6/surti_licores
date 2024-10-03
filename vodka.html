@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surtilicores Wilches</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-secondary p-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="inicio.html">Surtilicores Wilches</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  Tipos de licores
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="whiky.html">Whisky</a></li>
+                  <li><a class="dropdown-item" href="cerveza.html">Cerveza</a></li>
+                  <li><a class="dropdown-item" href="vodka.html">Vodka</a></li>
+                  <li><a class="dropdown-item" href="aguardiente.html">Aguardiente</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
+            Ver carrito (<span id="cart-count">0</span>)
+          </button>
+        </div>
+      </nav>
+
+      <!-- Productos -->
+      <div class="container text-center mt-4">
+        <div class="row">
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img class="img2" src="IMAGENES/esIMG_20230425_152349_381.jpg" class="card-img-top" alt="" height="300px" width="250px">
+              <div class="card-body">
+                <h2>Smirnoff</h2>
+                <p>Precio $10 USD</p>
+                <button class="btn btn-success" onclick="addToCart('Smirnoff', 10)">Agregar al carrito</button>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="IMAGENES/es002026-Smirnoff-Red-Label-375ml.png" class="card-img-top" alt="" height="300px" width="300px">
+              <div class="card-body">
+                <h2>Smirnoff Botella</h2>
+                <p>Precio $80 USD</p>
+                <button class="btn btn-success" onclick="addToCart('Smirnoff Botella', 80)">Agregar al carrito</button>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img src="IMAGENES/esvodka-smirnoff-ice-green-lata-250-ml-4.jpg" class="card-img-top" alt="" height="300px" width="300px">
+              <div class="card-body">
+                <h2>Smirnoff Verde</h2>
+                <p>Precio $150 USD</p>
+                <button class="btn btn-success" onclick="addToCart('Smirnoff Verde', 150)">Agregar al carrito</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal del carrito -->
+      <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cartModalLabel">Carrito de Compras</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul id="cart-items" class="list-group mb-3"></ul>
+              <h5>Total: $<span id="total-price">0</span> USD</h5>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Pagar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        let cart = [];
+        let totalPrice = 0;
+
+        function addToCart(product, price) {
+          cart.push({ product, price });
+          totalPrice += price;
+          updateCart();
+        }
+
+        function updateCart() {
+          const cartItems = document.getElementById('cart-items');
+          const totalElement = document.getElementById('total-price');
+          const cartCount = document.getElementById('cart-count');
+
+          cartItems.innerHTML = '';
+          cart.forEach(item => {
+            const li = document.createElement('li');
+            li.classList.add('list-group-item');
+            li.textContent = `${item.product} - $${item.price} USD`;
+            cartItems.appendChild(li);
+          });
+
+          totalElement.textContent = totalPrice;
+          cartCount.textContent = cart.length;
+        }
+      </script>
+</body>
+</html>
